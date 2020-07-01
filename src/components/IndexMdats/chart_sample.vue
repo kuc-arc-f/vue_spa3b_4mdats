@@ -1,11 +1,11 @@
 <template>
   <div>
-    <LineChart/>
+    <ChartView />
   </div>
 </template>
  
 <script>
-import LineChart from './LineChart'
+import ChartView from './ChartView'
 
 //
 export default {
@@ -15,7 +15,7 @@ export default {
     }
   },
   components: {
-    LineChart
+    ChartView
   }
 }
 </script>

@@ -8,9 +8,10 @@ export default {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'Data One',
+          label: 'Data-1',
           fill: false,
-          backgroundColor: '#f87979',
+          backgroundColor: '#FF6384',
+          borderColor: '#FF6384',
           data: [40, 39, 10, 40, 39, 80, 40]
         }
       ]

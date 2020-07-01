@@ -28,10 +28,8 @@ import IndexMdatsNew from '../components/IndexMdats/new'
 import IndexMdatsEdit from '../components/IndexMdats/edit'
 import IndexMdatsChat from '../components/IndexMdats/chart'
 import IndexMdatsImport from '../components/IndexMdats/import_mdat'
+import IndexMdatsSample from '../components/IndexMdats/chart_sample'
 
-//
-//import LineSample from '../components/LineSample'
-//import LineSample2 from '../components/LineSample2'
 //
 import FilesTest from '../components/Files/test'
 import FilesTest2 from '../components/Files/test2'
@@ -65,9 +63,7 @@ export default new Router({
 		{ path: '/idx_mdat/edit/:id', component: IndexMdatsEdit },
 		{ path: '/idx_mdat/chart', component: IndexMdatsChat },
 		{ path: '/idx_mdat/import', component: IndexMdatsImport },
-		/* chart-sample */
-//		{ path: '/chart_sample', component: LineSample },
-//		{ path: '/chart_sample2', component: LineSample2 },
+		{ path: '/idx_mdat/sample', component: IndexMdatsSample },
 
 		/* files */
 		{ path: '/files/test', component: FilesTest },
