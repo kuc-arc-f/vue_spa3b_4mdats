@@ -50,6 +50,7 @@ npm run build
 ***
 ### Blog :
 
+https://knaka0209.hatenablog.com/entry/indexed_db_4mdats
 
 ***
 
