@@ -28,11 +28,14 @@ import IndexMdatsNew from '../components/IndexMdats/new'
 import IndexMdatsEdit from '../components/IndexMdats/edit'
 import IndexMdatsChat from '../components/IndexMdats/chart'
 import IndexMdatsImport from '../components/IndexMdats/import_mdat'
+import IndexMdatsImportCsv from '../components/IndexMdats/import_csv'
 import IndexMdatsSample from '../components/IndexMdats/chart_sample'
 
 //
 import FilesTest from '../components/Files/test'
 import FilesTest2 from '../components/Files/test2'
+import FilesExportCsv from '../components/Files/export_csv'
+
 
 Vue.use(Router)
 //
@@ -63,11 +66,13 @@ export default new Router({
 		{ path: '/idx_mdat/edit/:id', component: IndexMdatsEdit },
 		{ path: '/idx_mdat/chart', component: IndexMdatsChat },
 		{ path: '/idx_mdat/import', component: IndexMdatsImport },
+		{ path: '/idx_mdat/import_csv', component: IndexMdatsImportCsv },
 		{ path: '/idx_mdat/sample', component: IndexMdatsSample },
 
 		/* files */
 		{ path: '/files/test', component: FilesTest },
 		{ path: '/files/test2', component: FilesTest2 },
+		{ path: '/files/csv', component: FilesExportCsv },
 
 	] 
 })

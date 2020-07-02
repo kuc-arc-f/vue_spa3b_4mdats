@@ -1,10 +1,13 @@
 <template>
     <div>
-        <h1>DoxieTasks- test:</h1>
+        <h1>DexieTasks- test:</h1>
         <hr />
         data : {{ data1 }}
         <hr />
         <button v-on:click="test1()">[ test1 ]</button>
+        <hr />
+        <button v-on:click="test2()">[ test2 ]</button>
+        <hr />
 
     </div>
 </template>
@@ -39,6 +42,23 @@ export default {
         }
     },
     methods: {
+        test2(){
+//            var str ="2020/7/1"
+            var str ="2020-7-1"
+//            const replaced = str.replace(/,/g, ' ')
+            const replaced = str.replace(/\//g, '-')
+            var tmp = replaced.split("-");
+console.log( tmp )
+
+            /*
+            var fname = "aaa.json"
+            if ( fname.match(/.json/) == null ){
+console.log( "#false")
+            }else{
+console.log( fname )
+            }
+            */
+        },
         test1(){
             var date_str = "2020-06-01T00:00:00.000Z"
 //            var date = new Date("2020-06-01T00:00:00.000Z");

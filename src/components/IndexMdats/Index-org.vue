@@ -3,22 +3,34 @@
         <FlashMessage></FlashMessage>
         <div class="row" style="margin-top: 10px;">
             <div class="col-sm-4"><h3>Mdats</h3>
+            <p class="mb-0" style="color: gray;">IndexedDB - measurement data
+            </p>
             </div>
-            <div class="col-sm-4">
-                <router-link :to="'/idx_mdat/new/'" class="btn btn-primary">Create
-                </router-link>
-                &nbsp;&nbsp;
-                <router-link :to="'/idx_mdat/chart/'" class="btn btn-outline-primary">Chart
-                </router-link>
+            <div class="col-sm-4" >
+                <div class="btn_center_wrap mt-3">
+                    <router-link :to="'/idx_mdat/new/'" class="btn btn-primary">Create
+                    </router-link>
+                    &nbsp;&nbsp;
+                    <router-link :to="'/idx_mdat/chart/'" class="btn btn-outline-primary">Chart
+                    </router-link>
+                </div>
             </div>
             <div class="col-sm-4" style="text-align: right;">
-                <a id="download" href="" download="tasks.json" class="btn btn-outline-primary btn-sm"
-                v-on:click="export_task()">Export
-                </a>                
-                &nbsp;&nbsp;
-                <a href="" v-on:click="move_action('/dexie_tasks/import');"
-                    class="btn btn-outline-primary btn-sm">Import
-                </a>                 
+                <div class="btn_right_wrap mt-3">
+                    <a id="download" href="" download="mdats.json" class="btn btn-outline-primary btn-sm"
+                    v-on:click="export_task()">Export
+                    </a>                
+                    &nbsp;&nbsp;
+                    <a href="" v-on:click="move_action('/idx_mdat/import');"
+                        class="btn btn-outline-primary btn-sm">Import
+                    </a>  
+                    <br />
+                    <a id="download_csv" href="" download="mdats.json" class="btn btn-outline-primary btn-sm"
+                    v-on:click="export_task()">CSV Export
+                    </a>                
+                    &nbsp;&nbsp;
+
+                </div>
             </div>
         </div>
         <hr class="mt-2 mb-2" />
@@ -70,12 +82,14 @@
         <div class="page_info_wrap">
             <ul>
                 <li>このページの機能は、オープンソースで公開しております。<br />
-                    <a  href=' '>
+                    <a  href='https://github.com/kuc-arc-f/vue_spa3b_4mdats'>
+                        https://github.com/kuc-arc-f/vue_spa3b_4mdats
                     </a><br />
                     <br />
                 </li>
                 <li>関連ブログ:<br />
-                    <a  href=' '>
+                    <a  href='https://knaka0209.hatenablog.com/entry/indexed_db_4mdats'>
+                        https://knaka0209.hatenablog.com/entry/indexed_db_4mdats
                     </a><br />
                 </li>
             </ul>
@@ -115,14 +129,13 @@ export default {
     mixins:[Mixin],
     components: { FlashMessage },
     created () {
-        db = new Dexie( this.sysConst.DEXIE_DB_NAME );
-        db.version(this.sysConst.DEXIE_DB_VERSION).stores(
-                this.sysConst.DEXIE_DB_STORE );  
+        var AppConst = LibMdats.get_const()
+        db = new Dexie( AppConst.DB_NAME );
+        db.version( AppConst.DB_VERSION).stores( AppConst.DB_STORE );  
         var month_str = LibCommon.formatDate( new Date() , 'YYYY-MM')
         this.set_chart_param( month_str )
         month_str = month_str + "-01" +  TIME_INIT_STR
         this.now_month = new Date(month_str) 
-console.log( this.now_month );
         this.now_month_title = LibCommon.formatDate( this.now_month , 'YYYY-MM')     
         this.before_month = LibMdats.get_before_month( this.now_month.toString())
         this.after_month = LibMdats.get_after_month( this.now_month.toString())
@@ -141,7 +154,6 @@ console.log( this.now_month );
     },
     methods: {
         get_items: async function(){
-//console.log( LibCommon.formatDate( this.after_month , 'YYYY-MM') )
             var start_month = LibCommon.formatDate( this.now_month , 'YYYY-MM')
             var end_month = LibCommon.formatDate( this.after_month , 'YYYY-MM')
             var start = start_month + "-01" +  TIME_INIT_STR
@@ -158,12 +170,11 @@ console.log( this.now_month );
             });  
             data = LibMdats.convert_items(data)
             this.mdats = data          
-console.log( data )
-            /*
+//console.log( data )
+           var self = this
             db.mdats.toArray().then(function ( data ) {
                 self.items_org = data
             });            
-            */
         },
         change_month_center: function(){
             var date = this.now_month_title + "-01" +  TIME_INIT_STR         
@@ -172,9 +183,7 @@ console.log( data )
             this.now_month_title = LibCommon.formatDate( this.now_month , 'YYYY-MM')
             this.set_chart_param( this.now_month_title )
 console.log( this.now_month );   
-//this.now_month_title = LibCommon.formatDate( this.now_month , 'YYYY-MM')
             this.get_items()
-
         },
         change_month_before: function(){
             var date = this.now_month

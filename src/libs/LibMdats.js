@@ -34,4 +34,30 @@ export default {
         date.setMonth( date.getMonth() +1);
         return date
     },
+    get_csv_items: function( items ){
+        var ret = ""
+
+        var data = "date,Height,Low" +'\r\n'
+        items.forEach(function(item){
+            data += item.m_date + ','
+            data += item.hnum + ','
+            data += item.lnum + ',\r\n'
+//console.log(item.m_date )
+        });        
+        ret = data
+        return ret
+    },    
+    convertCSVtoArray :function(str){
+        var result = [];
+        var tmp = str.split("\n"); // 改行を区切り文字
+        for(var i=0;i<tmp.length;++i){
+            var row = tmp[i].split(',');
+//            console.log(row.length );
+            if(i > 0 && row.length >= 3 ){
+                result.push( row )
+            }
+        }
+        return result
+    }
+         
 }

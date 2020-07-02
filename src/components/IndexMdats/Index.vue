@@ -15,7 +15,7 @@
                     </router-link>
                 </div>
             </div>
-            <div class="col-sm-4" style="text-align: right;">
+            <div class="col-sm-4" style="text-align: center;">
                 <div class="btn_right_wrap mt-3">
                     <a id="download" href="" download="mdats.json" class="btn btn-outline-primary btn-sm"
                     v-on:click="export_task()">Export
@@ -23,7 +23,25 @@
                     &nbsp;&nbsp;
                     <a href="" v-on:click="move_action('/idx_mdat/import');"
                         class="btn btn-outline-primary btn-sm">Import
-                    </a>                 
+                    </a>  
+                    <br />
+                    <div class="btn-group mt-2 mb-2" >
+                        <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            CSV <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a id="download_csv" href="" download="mdats.csv" class="dropdown-item"
+                            v-on:click="export_csv()">
+                                CSV Export
+                            </a>
+                            <div class="dropdown-divider"></div>                            
+                            <a href="" v-on:click="move_action('/idx_mdat/import_csv');"
+                                class="dropdown-item">CSV Import 
+                            </a>
+
+                        </div><!-- /.dropdown-menu -->                        
+                    </div><!-- /.btn-group -->	
                 </div>
             </div>
         </div>
@@ -41,7 +59,8 @@
             </button>&nbsp;    
             <button v-on:click="change_month_after()" class="btn btn-outline-primary">
                 <i class="fas fa-arrow-circle-right"></i>
-            </button>&nbsp;    
+            </button>&nbsp; 
+
         </div>
         <table class="table">
         <thead>
@@ -213,6 +232,18 @@ console.log( this.now_month );
                 document.getElementById("download").href = window.URL.createObjectURL(blob);
             }            
         },
+        export_csv: function(){
+            var content = LibMdats.get_csv_items( this.mdats )
+// console.log( content )
+            var blob = new Blob([ content ], { "type" : "text/csv" });
+            var fname = "mdats.csv"
+            if (window.navigator.msSaveBlob) { 
+                window.navigator.msSaveBlob(blob, fname ); 
+                window.navigator.msSaveOrOpenBlob(blob, fname ); 
+            } else {
+                document.getElementById("download_csv").href = window.URL.createObjectURL(blob);
+            }            
+        },  
         move_action: function( action  ){
             this.set_exStorage(this.sysConst.KEY_NEXT_ACTION , action )
             window.location.href = this.sysConst.HTTP_URL
